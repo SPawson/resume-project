@@ -32,6 +32,15 @@ html{
     background-color: #3498db;
 }
 
+.ul-nav-color-interests{
+    background-color: #f44b42;
+}
+
+.ul-nav-color-github{
+    background-color: #2655a0;
+}
+
+
 .ul-nav-color-download{
     background-color: #525252;
 }
@@ -46,6 +55,10 @@ html{
 
 .bg-color-work-history{
     background-color: #9b59b6 ;
+}
+
+.bg-color-contact{
+    background-color: #fff;
 }
 
 /*--------------------------------Special Paddings/Margins/Text*/
@@ -130,6 +143,12 @@ header{
     margin-bottom: 20px;
 }
 
+.contact-heading{
+    font-family: "Exo", sans-serif;
+    font-weight: 300;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
 /*--------------------------------Nav Styles*/
 
 #nav{
@@ -294,6 +313,30 @@ color: #e67e22;
     margin-bottom: 20px;
     
 }
+
+/*--------------------------------Contacts */
+
+.center-form{
+    padding-top: 10px;
+    margin: 0 auto;
+    max-width: 70%;
+}
+
+button[type="submit"]{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    background-color: #e84610;
+    color: #fafafa;
+}
+
+/*******************
+    Interests
+********************/
+#map {
+    min-height: 360px;
+    margin-bottom: 15px;
+}
+
 /*--------------------------------Footer */
 
 footer{
@@ -360,5 +403,14 @@ footer span a i:hover{
     padding: 0 30px;
     float: none;
     display: table-cell;
+}
+}
+
+@media(min-width: 768px){
+    .center-form{
+    padding-top: 30px;
+    min-height: 240px;
+    margin: 0 auto;
+    max-width: 50%;
 }
 }
