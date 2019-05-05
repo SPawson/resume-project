@@ -16,24 +16,24 @@ function userInformationHTML(userData) {
 }
 
 function repoInformationHTML(repo) {
-    
+
     var listItemsHTML = repo.map(function(repo) {
-            return `
+        return `
             <li>
                 <a href="${repo.html_url}" target="_blank">${repo.name}</a>
             </li>
             `
-        });
-   
+    });
+
     if (repo.length == 0) {
-        return  `
+        return `
         <div class="clearfix repo-list">
             No Repositories found!
         </div>
         `;
     }
     else {
-       return `<div class="clearfix repo-list">
+        return `<div class="clearfix repo-list">
                     <p><strong>Repo List:</strong></p>
                     <ul>
                         ${listItemsHTML.join('\n')}
@@ -45,7 +45,7 @@ function repoInformationHTML(repo) {
 function fetchGitHubInformation(event) {
     $('#gh-user-data').html('');
     $('#gh-repo-data').html('');
-    
+
     var username = $('#gh-username').val(); //.val gets value in the text field
 
     if (!username) {
@@ -63,7 +63,7 @@ function fetchGitHubInformation(event) {
         $.getJSON(`https://api.github.com/users/${username}`), //first response
         $.getJSON(`https://api.github.com/users/${username}/repos`) //second response
     ).then(
-        function(firstResponse,secondResponse) {
+        function(firstResponse, secondResponse) {
             var userData = firstResponse[0];
             var repoData = secondResponse[0];
             $("#gh-user-data").html(userInformationHTML(userData));
@@ -73,6 +73,13 @@ function fetchGitHubInformation(event) {
             if (errorResponse.status === 404) {
                 $("#gh-user-data").html(
                     `<h2>No info found for user ${username}</h2>`);
+            }
+            else if (errorResponse.status === 403) {
+                var resetTime = new Date(errorResponse.getResponseHeader('X-RateLimit-Reset')*1000);
+                
+                
+                $("#gh-user-data").html(
+                    `<h4>Too many requests, please wait until ${resetTime.toLocaleTimeString()}</h4>`);
             }
             else {
                 console.log(errorResponse);
